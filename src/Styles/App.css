@@ -91,3 +91,22 @@ div {
     outline: none;
     font-size:16px;
 }
+.favorite-btn{
+    width:100%;
+    padding:10px;
+    margin-top:12px;
+    border:none;
+    border-radius:8px;
+    background-color:#baabac;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+
+
+}
+.favorite-btn:hover{
+    background-color:#9c7e7e;
+    transform: scale(1.03);
+}

@@ -1,4 +1,4 @@
-function Navbar({searchTerm,setSearchTerm}){
+function Navbar({searchTerm,setSearchTerm,showFavorites,setShowFavorites}){
     return (
         <nav className="Navbar">
             <h2>Movie Planner</h2>
@@ -6,8 +6,8 @@ function Navbar({searchTerm,setSearchTerm}){
              <input className="search" type="text" placeholder="Search Movies" 
              value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
             <div className="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Favorites</a>
+            <button onClick={()=>setShowFavorites(false)}>Home</button>
+            <button onClick={()=>setShowFavorites(true)}>Favorites</button>
             <a href="#">About</a>
             </div>
         </nav>
