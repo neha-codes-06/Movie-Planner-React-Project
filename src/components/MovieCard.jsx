@@ -7,7 +7,7 @@ function MovieCard(props){
             <h3>{props.title}</h3>
             <p>{props.year}</p>
             <p>Rating: {props.rating}</p>
-
+            <button className="favorite-btn"onClick={props.onFavorite}>{props.isFavorite?"❤️Added":"🤍Add to Favorites"}</button>
             </div>
             
         
