@@ -1,9 +1,24 @@
-import {userState,userEffect}from "react"
+import {useState,useEffect}from "react"
+const API_KEY=import.meta.env.VITE_TMDB_API_KEY;
 function MovieModal(props){
-
-
-    
-
+    const [trailer, setTrailer]=useState(null)
+    useEffect(()=>{
+        const fetchTrailer=async()=>{
+            try{
+                const response=await fetch(`https://api.themoviedb.org/3/movie/${props.movie.id}/videos?api_key=${API_KEY}`)
+                const data=await response.json()
+                const trailerData=data.results.find((video)=>video.type==="Trailer"&&video.site==="YouTube")
+                console.log(trailerData)
+                if(trailerData){
+                    setTrailer(`https://www.youtube.com/watch?v=${trailerData.key}`)
+                }
+            }
+            catch(error){
+                console.log(error)
+            }
+        }
+        fetchTrailer()
+    },[props.movie])
     return(
         <div className="modal">
             <div className="modal-content">
@@ -17,12 +32,21 @@ function MovieModal(props){
                 <p><strong>Overview:</strong> {props.movie.overview}</p>
                 <p><strong>Vote Count:</strong> {props.movie.vote_count}</p>
                 <p><strong>Popularity:</strong> {props.movie.popularity}</p>
-                <p></p>
-                <button className="close-btn"onClick={props.onClose}>Close</button>
+                {trailer && (
 
-</div>
+                    <button className="trailer-btn" onClick={() => window.open(trailer,"_blank")}>
+                        Watch Trailer
+                    </button>
+                )}
+                <br></br>
+                <button className="close-btn" onClick={props.onClose}>
+                    Close
+                </button>
             </div>
+        </div>
         </div>
     )
 }
+
+
 export default MovieModal
