@@ -13,14 +13,25 @@ function App(){
     return savedFavorites?JSON.parse(savedFavorites):[]
   })
   const [showFavorites,setShowFavorites]=useState(false)
+  const [selectedMovie,setSelectedMovie]=useState(null)
 
   const filteredMovies=movies.filter((movie)=>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   )
   function addToFavorites(movie){
+    const alreadyFavorite=favorites.some((fav)=>fav.id===movie.id);
+    if(!alreadyFavorite){
     setFavorites([...favorites,movie])
-    console.log(movie.title);
+    }
+    
   }
+
+  function removeFromFavorites(movieId){
+    const updatedFavorites=favorites.filter((movie)=>movie.id !==movieId);
+    setFavorites(updatedFavorites);
+
+  }
+
   useEffect(()=>{
     const fetchMovies=async()=>{
       const data=await getTrendingMovies()
@@ -54,6 +65,9 @@ function App(){
        poster={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
        onFavorite={() => addToFavorites(movie)}
        isFavorite={favorites.some((fav)=>fav.id===movie.id)}
+       onRemove={()=>removeFromFavorites(movie.id)}
+       showFavorites={showFavorites}
+       onMovieClick={()=>setSelectedMovie(movie)}
        />
 
     ))}
