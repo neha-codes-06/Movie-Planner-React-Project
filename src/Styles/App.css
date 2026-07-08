@@ -82,12 +82,12 @@ div {
     font-size:16px;
 }
 .search{
-    width:320px;
+    width:350px;
     padding:10px 15px;
     border-radius:20px;
     border:none;
-    background-color: #1f2937;
-    color: white;
+    background-color:rgb(39, 37, 37);
+    color:white;
     outline: none;
     font-size:16px;
 }
@@ -97,7 +97,7 @@ div {
     margin-top:12px;
     border:none;
     border-radius:8px;
-    background-color:#baabac;
+    background-color:rgb(233, 84, 84);
     color:white;
     font-size:16px;
     font-weight:bold;
@@ -109,4 +109,19 @@ div {
 .favorite-btn:hover{
     background-color:#9c7e7e;
     transform: scale(1.03);
+}
+.nav-btn{
+    color:white;
+    font-size:16px;
+    background-color:transparent;
+    border: none;
+    cursor:pointer;
+    transition:0.4s;
+    
+
+}
+.nav-btn:hover{
+    color:rgb(45, 3, 3)(206, 147, 147);
+    transform: scale(1.03);
+
 }
