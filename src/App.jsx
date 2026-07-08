@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import MovieCard from "./components/MovieCard"
 import { getTrendingMovies } from "./services/tmdb"
+import MovieModal from "./components/MovieModal"
+import About from "./components/About"
 
 function App(){
   const [movies,setMovies]=useState([])
@@ -14,6 +16,7 @@ function App(){
   })
   const [showFavorites,setShowFavorites]=useState(false)
   const [selectedMovie,setSelectedMovie]=useState(null)
+  const [showAbout,setShowAbout]=useState(false)
 
   const filteredMovies=movies.filter((movie)=>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -45,6 +48,7 @@ function App(){
     localStorage.setItem("favorites",JSON.stringify(favorites))
   },[favorites])
   const moviesToShow=showFavorites?favorites:filteredMovies
+  console.log(selectedMovie)
   return (
    <>
 
@@ -53,8 +57,11 @@ function App(){
     setSearchTerm={setSearchTerm}
     showFavorites={showFavorites}
     setShowFavorites={setShowFavorites}
+    showAbout={showAbout}
+    setShowAbout={setShowAbout}
     />
     <Hero />
+    {showAbout?(<About/>):(
     <div className="movie-container">
     {moviesToShow.map((movie)=>(
 
@@ -69,10 +76,18 @@ function App(){
        showFavorites={showFavorites}
        onMovieClick={()=>setSelectedMovie(movie)}
        />
-
+   
     ))}
 
   </div>
+    )}
+
+  {selectedMovie&&
+  <MovieModal movie={selectedMovie} 
+  onClose={()=>setSelectedMovie(null)}/>
+}
+
+
 
    </>
   )
